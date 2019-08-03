@@ -7,7 +7,6 @@ def two_sum(nums, target)
             if nums[base] + nums[oppo]  == target
                 return [base, oppo]
             end
-            puts format("%d, %d", base, oppo)
             oppo +=1
         end
         base +=1
