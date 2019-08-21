@@ -1,6 +1,44 @@
 # @param {String} s
 # @return {String}
 def longest_palindrome(s)
+    return "" if s.empty?
+
+    head, tail = 0, 0
+
+    i = 0
+    while i < s.size
+        len1 = find_palindrome(s, i, i)
+        len2 = find_palindrome(s, i, i + 1)
+        len = [len1, len2].max
+#        puts "len=#{len}"
+        if tail - head < len
+            head = i - (len - 1) / 2
+            tail = i + len / 2
+        end
+#        puts "head=#{head}, tail=#{tail}"
+
+        i += 1
+    end
+
+    s[head..tail]
+end
+
+def find_palindrome(s, left, right)
+#    puts "Checking #{s[left..right]}, i=#{left}, j=#{right}"
+
+    l, r = left, right
+    while 0 <= l && r < s.size && s[l] == s[r]
+        l -= 1
+        r += 1
+#        puts "l=#{l}, r=#{r}"
+    end
+    r - l - 1
+end
+
+# leetcode might has problem in DP solution on Ruby
+# https://leetcode.com/problems/longest-palindromic-substring/discuss/160601/Ruby-dp-solution-not-TLE-possible
+
+def longest_palindrome_dp(s)
 
   return "" if s.length == 0
 
